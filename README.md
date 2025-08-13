@@ -12,6 +12,7 @@ Smooth animations, pastel UI
 Mobile + desktop responsive
 
 ![App Preview](preview.png)
+https://wimeytimey.vercel.app
 
 Run
 Open index.html in any modern browser.

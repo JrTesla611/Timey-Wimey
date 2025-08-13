@@ -11,8 +11,7 @@ Smooth animations, pastel UI
 
 Mobile + desktop responsive
 
-Preview
-preview.png
+![App Preview](preview.png)
 
 Run
 Open index.html in any modern browser.

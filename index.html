@@ -23,114 +23,7 @@
             --nav-bg: rgba(255, 255, 255, 0.9);
         }
 
-        @media (max-width: 360px) {
-            .preset-buttons {
-                grid-template-columns: 1fr;
-            }
-            
-            .controls {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .control-btn {
-                width: 100%;
-                max-width: 200px;
-                flex: none;
-            }
-
-            .fullscreen-mode .controls {
-                bottom: 15px;
-                grid-template-columns: 1fr;
-                gap: 8px;
-                padding: 12px;
-                align-items: center;
-                min-width: 200px;
-                max-width: 95vw;
-            }
-
-            .fullscreen-mode .control-btn {
-                width: 100%;
-                min-width: 150px;
-                padding: 12px 16px;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-            .control-btn, .preset-btn, .nav-btn, .sound-toggle {
-                min-height: 44px;
-            }
-            
-            .nav-item {
-                min-height: 40px;
-                display: flex;
-                align-items: center;
-            }
-            
-            .time-input {
-                min-height: 44px;
-            }
-
-            .fullscreen-mode .control-btn {
-                min-height: 44px;
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section.active {
-            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes buttonPress {
-            0% { transform: scale(1); }
-            50% { transform: scale(0.95); }
-            100% { transform: scale(1); }
-        }
-
-        .control-btn:active,
-        .preset-btn:active,
-        .nav-btn:active {
-            animation: buttonPress 0.2s ease-out;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        .fullscreen-mode #clock {
-            display: none !important;
-        }
-
-        .fullscreen-mode #timer.active,
-        .fullscreen-mode #stopwatch.active {
-            display: block !important;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loading-shimmer {
-            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
-            background-size: 1000px 100%;
-            animation: shimmer 2s infinite;
-        }
-                [data-theme="dark"] {
+        [data-theme="dark"] {
             --primary-bg: linear-gradient(135deg, #0c0c0c 0%, #1c1c1e 100%);
             --secondary-bg: rgba(28, 28, 30, 0.8);
             --card-bg: rgba(28, 28, 30, 0.95);
@@ -155,28 +48,8 @@
             font-feature-settings: "tnum" 1;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(0, 122, 255, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(0, 122, 255, 0.6), 0 0 30px rgba(0, 122, 255, 0.3); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
         @keyframes slideInFromTop {
             0% { opacity: 0; transform: translateY(-30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideInFromBottom {
-            0% { opacity: 0; transform: translateY(30px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
@@ -195,6 +68,22 @@
             100% { opacity: 1; }
         }
 
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(0, 122, 255, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(0, 122, 255, 0.6), 0 0 30px rgba(0, 122, 255, 0.3); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Navbar Styles */
         .navbar {
             position: fixed;
             top: 0;
@@ -204,8 +93,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
-            z-index: 100;
-            padding: 0;
+            z-index: 1000;
             animation: slideInFromTop 0.6s ease-out;
         }
 
@@ -217,6 +105,7 @@
             justify-content: space-between;
             padding: 0 20px;
             height: 60px;
+            position: relative;
         }
 
         .nav-logo {
@@ -227,6 +116,7 @@
             font-size: 1.2rem;
             color: var(--accent-blue);
             animation: slideInFromLeft 0.8s ease-out;
+            z-index: 1001;
         }
 
         .logo-icon {
@@ -249,6 +139,7 @@
             animation: glow 2s ease-in-out infinite;
         }
 
+        /* Desktop Navigation */
         .nav-items {
             display: flex;
             gap: 0;
@@ -269,6 +160,9 @@
             color: var(--text-secondary);
             position: relative;
             overflow: hidden;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
         }
 
         .nav-item::before {
@@ -298,11 +192,103 @@
             color: white;
         }
 
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            margin: 2px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .mobile-nav-toggle.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-nav-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-nav-toggle.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .mobile-nav-menu {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+        }
+
+        .mobile-nav-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 10px;
+        }
+
+        .mobile-nav-item {
+            padding: 15px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-nav-item.active {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        .mobile-nav-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+        }
+
         .nav-controls {
             display: flex;
             gap: 10px;
             align-items: center;
             animation: slideInFromRight 0.8s ease-out;
+            z-index: 1001;
         }
 
         .nav-btn {
@@ -317,6 +303,7 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 1rem;
+            color: var(--text-primary);
         }
 
         .nav-btn:hover {
@@ -326,6 +313,7 @@
             animation: pulse 0.6s ease-in-out;
         }
 
+        /* Main Content */
         .main-content {
             margin-top: 80px;
             padding: 20px;
@@ -352,7 +340,6 @@
             display: block;
             opacity: 1;
             transform: translateY(0);
-            animation: slideInFromBottom 0.6s ease-out;
         }
 
         .section-title {
@@ -362,7 +349,6 @@
             margin-bottom: 10px;
             color: var(--accent-blue);
             text-shadow: 0 2px 10px rgba(0, 122, 255, 0.2);
-            animation: fadeIn 0.8s ease-out 0.2s both;
         }
 
         .section-subtitle {
@@ -371,7 +357,6 @@
             font-weight: 400;
             margin-bottom: 40px;
             letter-spacing: -0.01em;
-            animation: fadeIn 0.8s ease-out 0.4s both;
         }
 
         .display-card {
@@ -384,7 +369,6 @@
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: slideInFromBottom 0.8s ease-out 0.6s both;
         }
 
         .display-card:hover {
@@ -459,24 +443,10 @@
             -webkit-backdrop-filter: blur(20px);
             position: relative;
             overflow: hidden;
-        }
-
-        .preset-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(0, 122, 255, 0.3) 0%, transparent 70%);
-            transition: all 0.4s ease;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-        }
-
-        .preset-btn:hover::before {
-            width: 300px;
-            height: 300px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .preset-btn:hover {
@@ -513,7 +483,6 @@
             border-bottom: 1px solid var(--border-color);
             font-variant-numeric: tabular-nums;
             font-weight: 400;
-            animation: slideInFromLeft 0.5s ease-out;
             transition: all 0.3s ease;
         }
 
@@ -550,37 +519,16 @@
             align-items: center;
             gap: 10px;
             min-width: 130px;
+            min-height: 44px;
             justify-content: center;
             letter-spacing: -0.01em;
             position: relative;
             overflow: hidden;
         }
 
-        .control-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-            transition: all 0.4s ease;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-        }
-
-        .control-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
         .control-btn:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 10px 30px rgba(0, 122, 255, 0.4);
-        }
-
-        .control-btn:active {
-            transform: translateY(-1px) scale(1);
         }
 
         .control-btn.secondary {
@@ -629,6 +577,7 @@
             -webkit-backdrop-filter: blur(20px);
             font-weight: 500;
             transition: all 0.3s ease;
+            min-height: 44px;
         }
 
         .time-input:focus {
@@ -643,138 +592,6 @@
             font-weight: 300;
             color: var(--text-secondary);
             animation: pulse 2s ease-in-out infinite;
-        }
-
-        .fullscreen-mode .navbar {
-            display: none;
-        }
-
-        .fullscreen-mode .main-content {
-            margin-top: 0;
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .fullscreen-mode .section-title,
-        .fullscreen-mode .section-subtitle {
-            display: none;
-        }
-
-        .fullscreen-mode .timer-display,
-        .fullscreen-mode .stopwatch-display {
-            font-size: clamp(4rem, 15vw, 8rem);
-            margin-bottom: 40px;
-            font-weight: 700;
-        }
-
-        .fullscreen-mode .clock-display {
-            font-size: clamp(4rem, 12vw, 7rem);
-            font-weight: 700;
-        }
-
-        .fullscreen-mode .display-card {
-            background: transparent;
-            box-shadow: none;
-            border: none;
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-            padding: 40px 20px;
-        }
-
-        .fullscreen-mode .controls {
-            position: fixed;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--card-bg);
-            padding: 20px 30px;
-            border-radius: 25px;
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-            justify-items: center;
-            align-items: center;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            max-width: 90vw;
-            width: auto;
-            min-width: 300px;
-        }
-
-        .fullscreen-mode .control-btn {
-            white-space: nowrap;
-            flex-shrink: 0;
-            min-width: 120px;
-            padding: 12px 20px;
-            width: 100%;
-            margin: 0;
-        }
-
-        .fullscreen-mode .preset-buttons {
-            display: none;
-        }
-
-        .fullscreen-mode .custom-timer-input {
-            display: none;
-        }
-
-        .fullscreen-mode .sound-settings {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            margin: 0;
-        }
-
-        .fullscreen-mode .sound-toggle {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow);
-        }
-
-        .fullscreen-mode .lap-times {
-            position: fixed;
-            top: 20px;
-            right: 80px;
-            left: 20px;
-            max-height: 150px;
-            margin: 0;
-            max-width: calc(100vw - 160px);
-        }
-
-        .fullscreen-exit-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1001;
-            font-size: 1.2rem;
-        }
-
-        .fullscreen-mode .fullscreen-exit-btn {
-            display: flex;
-        }
-
-        .fullscreen-exit-btn:hover {
-            background: var(--accent-red);
-            color: white;
-            transform: scale(1.1) rotate(90deg);
         }
 
         .sound-settings {
@@ -797,6 +614,10 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             font-weight: 500;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .sound-toggle.active {
@@ -806,10 +627,19 @@
             animation: glow 2s ease-in-out infinite;
         }
 
+        /* Responsive Styles */
         @media (max-width: 768px) {
+            .nav-items {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: flex;
+            }
+
             .nav-container {
                 padding: 0 15px;
-                height: 55px;
+                height: 60px;
             }
             
             .nav-logo {
@@ -821,15 +651,6 @@
                 width: 28px;
                 height: 28px;
                 font-size: 1rem;
-            }
-            
-            .nav-items {
-                gap: 0;
-            }
-            
-            .nav-item {
-                padding: 6px 12px;
-                font-size: 0.85rem;
             }
             
             .display-card {
@@ -866,7 +687,7 @@
             
             .main-content {
                 padding: 15px;
-                margin-top: 70px;
+                margin-top: 80px;
             }
             
             .custom-timer-input {
@@ -904,70 +725,9 @@
                 padding: 6px 12px;
                 font-size: 0.85rem;
             }
-
-            .fullscreen-mode .controls {
-                bottom: 30px;
-                padding: 15px 20px;
-                gap: 10px;
-                max-width: 95vw;
-                min-width: 280px;
-                grid-template-columns: repeat(2, 1fr);
-                justify-items: stretch;
-            }
-
-            .fullscreen-mode .control-btn {
-                min-width: 100px;
-                padding: 12px 16px;
-                font-size: 0.85rem;
-                width: 100%;
-            }
-
-            .fullscreen-mode .sound-settings {
-                top: 15px;
-                left: 15px;
-            }
-
-            .fullscreen-mode .lap-times {
-                top: 15px;
-                right: 70px;
-                left: 15px;
-                max-width: calc(100vw - 120px);
-                max-height: 120px;
-            }
-
-            .fullscreen-exit-btn {
-                top: 15px;
-                right: 15px;
-                width: 45px;
-                height: 45px;
-            }
         }
 
         @media (max-width: 480px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 10px;
-                height: auto;
-                padding: 10px 15px;
-            }
-            
-            .nav-logo {
-                order: 1;
-            }
-            
-            .nav-items {
-                order: 2;
-            }
-            
-            .nav-controls {
-                order: 3;
-            }
-            
-            .main-content {
-                margin-top: 90px;
-                padding: 10px;
-            }
-            
             .preset-buttons {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
@@ -995,11 +755,6 @@
                 display: inline-block;
             }
             
-            .nav-item {
-                padding: 6px 10px;
-                font-size: 0.8rem;
-            }
-            
             .control-btn {
                 padding: 10px 14px;
                 min-width: 90px;
@@ -1012,48 +767,23 @@
                 padding: 25px 15px;
                 border-radius: 18px;
             }
+        }
 
-            .fullscreen-mode .controls {
-                bottom: 20px;
-                padding: 12px 15px;
-                gap: 8px;
-                grid-template-columns: 1fr 1fr;
-                max-width: 98vw;
-                min-width: 260px;
+        @media (max-width: 360px) {
+            .preset-buttons {
+                grid-template-columns: 1fr;
             }
-
-            .fullscreen-mode .control-btn {
-                min-width: 90px;
-                padding: 10px 12px;
-                font-size: 0.75rem;
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .control-btn {
                 width: 100%;
-            }
-
-            .fullscreen-mode .sound-toggle {
-                padding: 6px 10px;
-                font-size: 0.75rem;
-            }
-
-            .fullscreen-exit-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-                top: 12px;
-                right: 12px;
-            }
-
-            .fullscreen-mode .sound-settings {
-                top: 12px;
-                left: 12px;
-            }
-
-            .fullscreen-mode .lap-times {
-                top: 12px;
-                right: 60px;
-                left: 12px;
-                max-width: calc(100vw - 100px);
-                max-height: 100px;
-                font-size: 0.8rem;
+                max-width: 200px;
+                flex: none;
             }
         }
     </style>
@@ -1066,14 +796,31 @@
                 <span>Timey Wimey</span>
             </div>
             
+            <!-- Desktop Navigation -->
             <div class="nav-items">
                 <div class="nav-item active" data-section="clock">Clock</div>
                 <div class="nav-item" data-section="timer">Timer</div>
                 <div class="nav-item" data-section="stopwatch">Stopwatch</div>
             </div>
+
+            <!-- Mobile Navigation Toggle -->
+            <button class="mobile-nav-toggle" id="mobileNavToggle">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </button>
             
             <div class="nav-controls">
                 <button class="nav-btn" id="themeToggle" title="Toggle Theme">◐</button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav-menu" id="mobileNavMenu">
+            <div class="mobile-nav-items">
+                <div class="mobile-nav-item active" data-section="clock">Clock</div>
+                <div class="mobile-nav-item" data-section="timer">Timer</div>
+                <div class="mobile-nav-item" data-section="stopwatch">Stopwatch</div>
             </div>
         </div>
     </nav>
@@ -1166,6 +913,7 @@
                 this.lapCounter = 1;
                 
                 this.currentSection = 'clock';
+                this.mobileNavOpen = false;
                 
                 document.documentElement.setAttribute('data-theme', 'dark');
                 
@@ -1181,7 +929,13 @@
 
             setupElements() {
                 this.elements = {
+                    // Desktop nav
                     navItems: document.querySelectorAll('.nav-item'),
+                    // Mobile nav
+                    mobileNavToggle: document.getElementById('mobileNavToggle'),
+                    mobileNavMenu: document.getElementById('mobileNavMenu'),
+                    mobileNavItems: document.querySelectorAll('.mobile-nav-item'),
+                    
                     sections: document.querySelectorAll('.section'),
                     themeToggle: document.getElementById('themeToggle'),
                     
@@ -1209,11 +963,34 @@
             }
 
             setupEventListeners() {
+                // Desktop navigation
                 this.elements.navItems.forEach(item => {
                     item.addEventListener('click', () => {
                         const section = item.dataset.section;
                         this.switchSection(section);
                     });
+                });
+
+                // Mobile navigation
+                this.elements.mobileNavToggle.addEventListener('click', () => {
+                    this.toggleMobileNav();
+                });
+
+                this.elements.mobileNavItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        const section = item.dataset.section;
+                        this.switchSection(section);
+                        this.closeMobileNav();
+                    });
+                });
+
+                // Close mobile nav when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (this.mobileNavOpen && 
+                        !e.target.closest('.mobile-nav-menu') && 
+                        !e.target.closest('.mobile-nav-toggle')) {
+                        this.closeMobileNav();
+                    }
                 });
 
                 this.elements.themeToggle.addEventListener('click', () => this.toggleTheme());
@@ -1272,8 +1049,26 @@
                 }
             }
 
+            toggleMobileNav() {
+                this.mobileNavOpen = !this.mobileNavOpen;
+                this.elements.mobileNavToggle.classList.toggle('active', this.mobileNavOpen);
+                this.elements.mobileNavMenu.classList.toggle('active', this.mobileNavOpen);
+            }
+
+            closeMobileNav() {
+                this.mobileNavOpen = false;
+                this.elements.mobileNavToggle.classList.remove('active');
+                this.elements.mobileNavMenu.classList.remove('active');
+            }
+
             switchSection(sectionName) {
+                // Update desktop nav
                 this.elements.navItems.forEach(item => {
+                    item.classList.toggle('active', item.dataset.section === sectionName);
+                });
+
+                // Update mobile nav
+                this.elements.mobileNavItems.forEach(item => {
                     item.classList.toggle('active', item.dataset.section === sectionName);
                 });
 
@@ -1435,7 +1230,7 @@
                 if (Notification.permission === 'granted') {
                     new Notification('Timer Complete!', {
                         body: 'Your countdown timer has finished.',
-                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">T</text></svg>'
+                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">⏰</text></svg>'
                     });
                 }
             }
@@ -1554,4 +1349,3 @@
     </script>
 </body>
 </html>
-
